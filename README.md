@@ -21,9 +21,7 @@ F_planemove:无人机运动状态 输入：方向向量 t 速度 输出：在t�
 
 F_missilemove:导弹运动状态 输入：方向向量 t 速度 输出：在t时刻的坐标 
 
-F_judge():计算有效遮蔽时间  输入t1 t2 t3 t4 输出有效遮蔽时间
-
-F_isdetect:判定导弹是否检测到目标
+F_judge():判断是否产生遮蔽  
 
 AI咨询：
 

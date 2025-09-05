@@ -2,7 +2,7 @@
 % 得t大于某个阈值，我们才会释放烟幕
 % 0-tRelease 干扰弹跟着无人机做匀速直线运动 tRelease-tBurst 干扰弹脱离无人机，做平抛运动
 % tBurst-(tBurst+tValid) 干扰弹爆炸，形成烟幕，只有在这个时间段才有输出point
-function [smokePos]=F_frogmove(vPlane,dirPlane,posPlane0,t,tRelease,tBurst,param)
+function [posSmoke]=F_frogmove(vPlane,dirPlane,posPlane0,t,tRelease,tBurst,param)
     % 0-tRelease 匀速直线运动（挂载阶段）
     dirPlane = dirPlane / norm(dirPlane);
     posRelease = posPlane0 + vPlane * dirPlane  * tRelease;
@@ -20,8 +20,8 @@ function [smokePos]=F_frogmove(vPlane,dirPlane,posPlane0,t,tRelease,tBurst,param
     if t>=tBurst && t<=tBurst+tValid
         move_t = t - tBurst;
         pzz = posBurst(3) - move_t * vDown;
-        smokePos = [px py pzz];
+        posSmoke = [px py pzz];
     else
-        smokePos = [0 0 0]; 
+        posSmoke = [0 0 0]; 
     end
 end

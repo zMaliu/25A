@@ -2,7 +2,7 @@ clc;clear;
 param=makeParam();
 %参量准备
 t1=1.5;
-t2=3.6 + t1;
+t2=3.6+t1;
 t3=20;
 v_fly=120;
 v_missile=300;
@@ -28,11 +28,12 @@ isfrog=false;               % 是否有烟幕
 % 提前初始化
 t11 = NaN; t22 = NaN; t33 = NaN; t44 = NaN;
 
-for t=0:0.001:T %T为时间阈值上界
+for t=0:0.01:30 %T为时间阈值上界
     %三个物体的运动状态
     [p_fly]=F_planemove(v_fly,action_fly,fly1_pos,t);
     [p_frog]=F_frogmove(v_fly,action_fly,fly1_pos,t,t1,t2,param);
     [p_missile]=F_missilemove(v_missile,action_missile,missile1_pos,t);
+    disp(norm(p_missile - p_frog));
     if t>=t2 && t<=t2+t3
         isfrog=true;
         isremain_frog=true;
@@ -50,7 +51,7 @@ for t=0:0.001:T %T为时间阈值上界
             isremain_missile=true;
         end
     end
-    if ~F_isdetect(p_missile, param) && isremain_missile%前假后真
+    if ~F_isdetect(p_missile, param) && isremain_missile %前假后真
         if isnan(t22)
             t22=t;
             isdetect=false;
@@ -66,8 +67,10 @@ for t=0:0.001:T %T为时间阈值上界
             end
         end
     end
-    if isfrog && isremain_frog
-        if norm(p_missile - p_frog)>10
+    % 在t33存在的情况下计算t44
+    % 两种情况 1.烟幕消失 2.导弹出烟幕了
+    if ~isnan(t33)
+        if ~isfrog || norm(p_missile - p_frog)>10
             if isnan(t44)
                 t44=t;
             end

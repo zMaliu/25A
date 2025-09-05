@@ -28,12 +28,12 @@ isfrog=false;               % 是否有烟幕
 % 提前初始化
 t11 = NaN; t22 = NaN; t33 = NaN; t44 = NaN;
 
-for t=0:0.01:30 %T为时间阈值上界
+for t=0:0.01:T %T为时间阈值上界
     %三个物体的运动状态
     [p_fly]=F_planemove(v_fly,action_fly,fly1_pos,t);
     [p_frog]=F_frogmove(v_fly,action_fly,fly1_pos,t,t1,t2,param);
     [p_missile]=F_missilemove(v_missile,action_missile,missile1_pos,t);
-    disp(norm(p_missile - p_frog));
+
     if t>=t2 && t<=t2+t3
         isfrog=true;
         isremain_frog=true;
@@ -78,8 +78,7 @@ for t=0:0.01:30 %T为时间阈值上界
     end
 
     if ~any(isnan([t11,t22,t33,t44]))
-        t_end = F_judge(t11,t22,t33,t44);
-        disp(t_end);
-        break;
+        t_end = F_judge(t11,t22,t33,t44);  
+        fprintf('有效时间 %.2f\n', t_end);
     end
 end

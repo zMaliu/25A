@@ -26,6 +26,10 @@ param.missiles(2).pos0 = [19000  600  2100];
 param.missiles(3).id   = 'M3';
 param.missiles(3).pos0 = [18000 -600  1900];
 
+% 导弹的锥型范围
+param.ang = 10;
+param.line = 3000;
+
 %% 5. 无人机初始位置
 param.plane(1).id   = 'FY1';
 param.plane(1).pos0 = [17800    0  1800];

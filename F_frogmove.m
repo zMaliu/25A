@@ -16,11 +16,14 @@ function [point]=F_frogmove(v,action,pos0,t,t1,t2,param)
 
     % t2-t3 干扰弹爆炸
     t3 = 20;
-    if t>t2 && t<t2+t3
+    if t>=t2 && t<=t2+t3
         move_t = t-t2;
         pxx = p2(1) + v * move_t * action(1);
         pyy = p2(2) + v * move_t * action(2); 
         pzz = p2(3) - move_t*0.3;
         point = [pxx pyy pzz];
+    else
+        point = [0 0 0]; 
     end
+    
 end

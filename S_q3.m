@@ -7,7 +7,7 @@ for t=0:0.1:13
         %1.1、判断是否可达
         F_canarrived();
         %1.2、判断是否遮挡
-        F_isarrived();
+        F_isshadow();
         %1.3、得到t时刻的点集合 进行最优点筛选
         best_point=F_select();
     end

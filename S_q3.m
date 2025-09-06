@@ -11,7 +11,7 @@ for t=0:0.1:13
         %1.3、得到t时刻的点集合 进行最优点筛选
         best_point=F_select();
     end
-    points=[dots,best_points];%加入最优解
+    points=[points,best_points];%加入最优解
 end
 
 %2、

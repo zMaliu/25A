@@ -27,10 +27,11 @@ F_missilemove:导弹运动状态 输入：方向向量 t 速度 输出：在t时
 
 F_judge():判断是否产生遮蔽  
 
-<<<<<<< HEAD
-=======
 F_q1_objective():第二问 自适应参数的目标函数
->>>>>>> 99cfb89d31cebe920b9e7a165dd1ae02f5496d28
+
+F_is_arrived: 判断点是否可达
+
+F_is_shadow: 判断点是否存在于遮挡区域
 
 AI咨询：
 

@@ -19,8 +19,8 @@ function dur = F_q1_objective(vPlane, varargin)
         % 1：固定航向，朝向假目标
         tRelease = varargin{1};
         tBurst   = varargin{2};
-        action_fly = posFake - fly1_pos; 
-        action_fly(3) = 0;
+        angle = 180;
+        action_fly = [cosd(angle), sind(angle), 0];
     elseif numel(varargin) == 3
         % 2：给定航向角（度）
         headingDeg = varargin{1};
@@ -54,7 +54,7 @@ function dur = F_q1_objective(vPlane, varargin)
             end
         end
 
-        % 三种情况 1.烟幕消失 2.导弹出烟幕了 3.烟幕没有遮蔽到
+        % 烟幕没有遮蔽到
         if ~isnan(t1)
             if ~F_judge(posSmoke, posMissile, param)
                 if isnan(t2)

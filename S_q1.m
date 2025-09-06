@@ -2,7 +2,7 @@ clc;clear;
 param=makeParam();
 %参量准备
 tRelease=1.5;
-tBurst=3.6+tRelease;
+tBurst=3.6;
 t3=20;
 v_fly=120;
 v_missile=param.const.missileV;
@@ -31,11 +31,11 @@ t1 = NaN; t2 = NaN;
 for t=0:0.01:T %T为时间阈值上界
     %三个物体的运动状态
     [p_fly]=F_planemove(v_fly,action_fly,fly1_pos,t);
-    [posSmoke]=F_frogmove(v_fly,action_fly,fly1_pos,t,tRelease,tBurst,param);
+    [posSmoke,posRelease,posBurst]=F_frogmove(v_fly,action_fly,fly1_pos,t,tRelease,tBurst,param);
     [posMissile]=F_missilemove(v_missile,action_missile,missile1_pos,t);
 
     %t1 如果烟幕遮蔽到了，开始记录t1
-    if t>=tBurst && t<=tBurst+t3
+    if t>=tBurst+tRelease && t<=tRelease+tBurst+t3
         if F_judge(posSmoke, posMissile, param)
             if isnan(t1)
                 t1=t;
@@ -53,3 +53,4 @@ for t=0:0.01:T %T为时间阈值上界
     end
 
 end
+fprintf("有效时间%.2f",t2-t1);

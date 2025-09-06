@@ -31,8 +31,6 @@ F_q1_objective():第二问 自适应参数的目标函数
 
 F_is_arrived: 判断点是否可达
 
-F_is_shadow: 判断点是否存在于遮挡区域
-
 F_location:计算投放点和爆炸点
 
 AI咨询：

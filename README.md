@@ -33,6 +33,8 @@ F_is_arrived: 判断点是否可达
 
 F_is_shadow: 判断点是否存在于遮挡区域
 
+F_location:计算投放点和爆炸点
+
 AI咨询：
 
 导引头的机理

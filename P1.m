@@ -33,15 +33,14 @@ for i = 1:length(t_vec)
     d2_vec(i) = dist(posSmoke, posMissile, oin);  % 存储
 end
 
-% --------- 最终效果：曲线+三点+y=10虚线+高亮有效区+注释 ---------
 figure; hold on; box on;
 
-% 1. 主曲线
+% 主曲线
 plot(t_vec, d2_vec, ...
      'Color', [0.2 0.5 0.9], 'LineWidth', 1.7);
 
-% 2. 三个关键圆点
-yval = interp1(t_vec, d2_vec, [1.5 3.6 20.1]);
+% 三个关键圆点
+yval = interp1(t_vec, d2_vec, [1.5 3.6 25.1]);
 plot(1.5,  yval(1), 'o', 'Color', [0.00 0.75 0.75], 'MarkerSize', 7, ...
      'MarkerFaceColor', [0.00 0.75 0.75], 'MarkerEdgeColor', 'none');
 plot(3.6,  yval(2), 'o', 'Color', [0.95 0.50 0.20], 'MarkerSize', 7, ...
@@ -49,10 +48,10 @@ plot(3.6,  yval(2), 'o', 'Color', [0.95 0.50 0.20], 'MarkerSize', 7, ...
 plot(25.1, yval(3), 'o', 'Color', [0.60 0.40 0.90], 'MarkerSize', 7, ...
      'MarkerFaceColor', [0.60 0.40 0.90], 'MarkerEdgeColor', 'none');
 
-% 3. y = 10 虚线
+% y = 10 虚线
 yline(10, 'Color', [0.4 0.4 0.4], 'LineStyle', '--', 'LineWidth', 1.2);
 
-% 4. 高亮 d2 ≤ 10 的区域
+% 高亮 d2 ≤ 10 的区域
 idxEff = d2_vec <= 10;                 % 有效索引
 area(t_vec(idxEff), d2_vec(idxEff), ...
      'FaceColor', [0.85 0.95 1], ...    % 淡蓝色
@@ -61,7 +60,6 @@ area(t_vec(idxEff), d2_vec(idxEff), ...
 plot(t_vec(idxEff),  d2_vec(idxEff),  ...
      'Color', 'r', 'LineWidth', 3.0);
 
-% 5. “有效时间”文字注释
 % 找到有效段中心时刻
 tEff   = t_vec(idxEff);
 tText  = mean([tEff(1) tEff(end)]);
@@ -73,13 +71,14 @@ text(tText, dText, '有效时间', ...
      'BackgroundColor', [1 1 1], ...   % 白底
      'Margin', 1);
 
-% 6. 图例（带方框）
 legend({'d_2 距离', ...
         '投放点 (t=1.5 s)', ...
         '爆炸点 (t=3.6 s)', ...
         '消失点 (t=25.1 s)'}, ...
-       'Location', 'best', 'Box', 'on');
+       'Location', 'best', 'Box', 'on', 'FontSize', 20);
 
-xlabel('时间 t (s)','FontSize', 15);
-ylabel('烟幕中心到导弹-目标连线距离 d_2 (m)','FontSize', 15);
+xlabel('时间 t (s)','FontSize', 20);
+ylabel('烟幕中心到导弹-目标连线距离 d_2 (m)','FontSize', 20);
 grid off;
+
+

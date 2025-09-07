@@ -14,9 +14,9 @@ bestT1 = 0;
 bestT2 = 0;
 
 %v_fly=70;angle=180;
-for v_fly=70:5:140
+for v_fly=70:1:140
     for angle=175:1:180
-        for t = 1:13
+        for t = 1:0.1:13
             dir_fly = [cosd(angle), sind(angle), 0];
             [pos_fly] = F_planemove(v_fly, dir_fly, pos0_fly, t);
             [pos_missile]=F_missilemove(v_missile,dir_missile,pos0_missile,t);
@@ -38,15 +38,15 @@ for v_fly=70:5:140
                     best_point = burst_point;
                 end
             end
-        
-            best_points(t).point = best_point;
-            best_points(t).distance = min_dist;
+            step=round((t - 1) * 10) + 1;
+            best_points(step).point = best_point;
+            best_points(step).distance = min_dist;
 
         end
         % 然后将 best_points(t).distance 进行从小到大排序，选取前三个
         % 提取所有距离
         all_distances = [best_points.distance];
-        all_times = 1:13;
+        all_times = 1:0.1:13;
         
         % 排序并获取前三个的索引
         [sorted_dist, idx] = sort(all_distances);
@@ -74,6 +74,10 @@ for v_fly=70:5:140
         end
 
         [dur_end, bestPick, unionInt] = F_q4select(result);
+        tRelease_vals = [tRelease{:}]; 
+        if any(abs(diff(nchoosek(tRelease_vals,2),[],2)) < 1)
+            dur_end = 0;
+        end
         if dur_end > maxDur
             maxDur = dur_end;
             best_dur = dur;

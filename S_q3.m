@@ -38,6 +38,7 @@ for v_fly=70:1:140
                     best_point = burst_point;
                 end
             end
+        
             step=round((t - 1) * 10) + 1;
             best_points(step).point = best_point;
             best_points(step).distance = min_dist;
@@ -59,6 +60,7 @@ for v_fly=70:1:140
         posRelease = cell(3,1);
         dur = cell(3,1);
         tRelease = cell(3,1);
+
         for i = 1:3
             idx = top3_idx(i);
             points{i} = best_points(idx).point;
@@ -66,6 +68,7 @@ for v_fly=70:1:140
 
         end
         dur_vals = [dur{:}];  
+        tRelease_vals = [tRelease{:}];  
 
         % 构造结果
         result = cell(1,3);
@@ -74,10 +77,6 @@ for v_fly=70:1:140
         end
 
         [dur_end, bestPick, unionInt] = F_q4select(result);
-        tRelease_vals = [tRelease{:}]; 
-        if any(abs(diff(nchoosek(tRelease_vals,2),[],2)) < 1)
-            dur_end = 0;
-        end
         if dur_end > maxDur
             maxDur = dur_end;
             best_dur = dur;

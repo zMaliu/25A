@@ -1,4 +1,4 @@
-function [posBurst, posRelease, dur, tRelease] = F_q3getdur(burstPoint, vPlane, headingDeg,posPlane0)
+function [posBurst, posRelease, dur, tRelease] = F_q3getdur(burstPoint, vPlane, headingDeg,posPlane0,param)
     % 输入：目标起爆点(1x3)、飞行速度、航向角
     % 输出：起爆点、投放点、遮蔽时长、释放时间
     dirPlane = [cosd(headingDeg), sind(headingDeg), 0];
@@ -8,6 +8,7 @@ function [posBurst, posRelease, dur, tRelease] = F_q3getdur(burstPoint, vPlane, 
     if zBurst >= zRelease
         error('起爆点高度必须低于无人机高度。');
     end
+    g=param.const.g;
     tBurst = sqrt(2 * (zRelease - zBurst) / g);
 
     % 由起爆点反推投放点（沿航向回推 v*tBurst），并设定释放时刻

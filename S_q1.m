@@ -43,7 +43,6 @@ for t=0:0.01:T %T为时间阈值上界
         end
     end
 
-    % 三种情况 1.烟幕消失 2.导弹出烟幕了 3.烟幕没有遮蔽到
     if ~isnan(t1)
         if ~F_judge(posSmoke, posMissile, param)
             if isnan(t2)

@@ -49,7 +49,7 @@ v_fly=70;angle=175;
             idx = top3_idx(i);
             points{i} = best_points(idx).point;
         end
-        t=F_q3(points,v_fly);
+        t=F_q3(points,v_fly,pos_fly,angle);
         
     %end
 %end

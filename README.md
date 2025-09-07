@@ -29,7 +29,11 @@ F_judge():判断是否产生遮蔽
 
 F_q1_objective():第二问 自适应参数的目标函数
 
+F_is_arrived: 判断点是否可达
+
 F_location:计算投放点和爆炸点
+
+F_q4select:从三个集合中各选取一个区间，使三者的并集长度最大
 
 AI咨询：
 
